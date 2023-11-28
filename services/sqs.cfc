@@ -22,6 +22,15 @@ component {
         );
         if ( apiResponse.statusCode == 200 ) {
             apiResponse[ 'data' ] = utils.parseXmlDocument( apiResponse.rawData );
+            if (! IsArray( apiResponse[ 'data' ].ListQueuesResult) ) {
+                if ( isStruct( apiResponse[ 'data' ].ListQueuesResult ) AND
+                    apiResponse[ 'data' ].ListQueuesResult.keyExists( 'QueueURL' ) ) {
+                    apiResponse[ 'data' ].ListQueuesResult = [ apiResponse[ 'data' ].ListQueuesResult.queueURL];
+                }
+                else {
+                    apiResponse[ 'data' ].ListQueuesResult = [];
+                }
+            }
         }
         return apiResponse;
     }
@@ -227,7 +236,7 @@ component {
                 payload,
                 {
                     'Attribute.5.Name': 'FifoQueue',
-                    'Attribute.5.Value': fifoQueue,
+                    'Attribute.5.Value': fifoQueue ? 'true' : 'false',
                     'Attribute.6.Name': 'ContentBasedDeduplication',
                     'Attribute.6.Value': contentBasedDeduplication
                 }

@@ -1,18 +1,24 @@
 <cfscript>
 
-queueName="testqueue7";
+queue = {
+    "queueName"="testqueue9",
+    "fifoQueue" = 1
+}
 
-queue = request.prc.aws.sqs.createQueue(
-    queueName=queueName,
-    fifoQueue=0    
+res = request.prc.aws.sqs.createQueue(
+    argumentCollection = queue  
 );
 
-if (queue.statuscode eq 200) {
-    writeDump(queue.data.createQueueResult.QueueUrl);
+if (res.statuscode eq 200) {
+    writeDump(res.data.createQueueResult.QueueUrl);
 }
 else {
     writeOutput("Create queue failed");
-    writeDump(queue);
+    writeDump(res);
+}
+
+if (queue.fifoQueue) {
+    writeOutput("Remember queue will be called #queue.queueName#.fifo");
 }
 
 </cfscript>

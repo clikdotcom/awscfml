@@ -1,12 +1,10 @@
 <cfscript>
-queueName = "testqueue5";
+queueName = "testqueue9.fifo";
 
 messages = request.prc.aws.sqs.receiveMessage(
         queueName=queueName,
         maxNumberOfMessages=10
 );
-
-writeDump(messages);
 
 results = [];
 
@@ -24,7 +22,7 @@ if (! results.len() ) {
 }
 
 for (message in results) {
-    writeDump(message.body);
+    writeDump(deserializeJSON( message.body ) );
     delete = request.prc.aws.sqs.deleteMessage(
         queueName=queueName,
         receiptHandle=message.receiptHandle

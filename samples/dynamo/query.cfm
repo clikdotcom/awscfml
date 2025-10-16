@@ -9,7 +9,7 @@ ExpressionAttributeValues = {
 }
 
 stopwatch variable="timer" {
-		data = request.prc.aws.dynamodb.query(TableName=table,KeyConditionExpression="sites_id = :s1 and section_id = :s2",ExpressionAttributeValues=ExpressionAttributeValues, projectionExpression='articles_id, headline, pubdate', indexName='section_id-index', consistentRead=true);
+		data = request.prc.aws.dynamodb.query(TableName=table,KeyConditionExpression="sites_id = :s1 and section_id = :s2",ExpressionAttributeValues=ExpressionAttributeValues, projectionExpression='articles_id, headline, pubdate, strapline', indexName='section_id-index', consistentRead=true);
 }
 
 writeDump(data);

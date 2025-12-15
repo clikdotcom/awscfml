@@ -1,8 +1,8 @@
 <cfscript>
 
 queue = {
-    "queueName"="testqueue9",
-    "fifoQueue" = 1
+    "queueName"="testqueue5",
+    "fifoQueue" = 0
 }
 
 res = request.prc.aws.sqs.createQueue(

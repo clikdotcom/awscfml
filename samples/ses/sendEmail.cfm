@@ -2,16 +2,16 @@
 
 // SES v2 SendEmail payload
 payload = {
-  FromEmailAddress = "message-responses@clikmessages.com",
-  Destination = {
-    ToAddresses = [ "tom@tompeerconsulting.com" ]
+  "FromEmailAddress" = "message-responses@clikmessages.com",
+  "Destination" = {
+    "ToAddresses" = [ "tom@tompeerconsulting.com" ]
   },
-  Content = {
-    Simple = {
-      Subject = { Data = "Hello from Lucee + SES", Charset = "UTF-8" },
-      Body = {
-        Text = { Data = "Plain-text body", Charset = "UTF-8" },
-        Html = { Data = "<h1>HTML body</h1><p>Hi there.</p>", Charset = "UTF-8" }
+  "Content" = {
+    "Simple" = {
+      "Subject" = { "Data" = "Hello from Lucee + SES", "Charset" = "UTF-8" },
+      "Body" = {
+        "Text" = { "Data" = "Plain-text body", "Charset" = "UTF-8" },
+        "Html" = { "Data" = "<h1>HTML body</h1><p>Hi there.</p>", "Charset" = "UTF-8" }
       }
     }
   }

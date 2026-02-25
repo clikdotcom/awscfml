@@ -12,7 +12,7 @@ component {
 
 	private struct function credentials() {
 
-		local.file = ExpandPath( "/root/credentials.json ");
+		local.file = ExpandPath( "/root/credentials_main.json ");
 		try{
 			return deserializeJSON( FileRead( local.file ) );
 		} 

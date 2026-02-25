@@ -1,5 +1,5 @@
 <cfscript>
-queueName = "testqueue9.fifo";
+queueName = "errors";
 
 messages = request.prc.aws.sqs.receiveMessage(
         queueName=queueName,

@@ -75,6 +75,26 @@ component {
         return apiResponse;
     }
 
+    public any function validateEmail(
+        required string email
+    ) {
+        var formParams = { EmailAddress = arguments.email };
+
+        var requestSettings = api.resolveRequestSettings();
+        var apiResponse = apiCall(
+            requestSettings,
+            'POST',
+            '/v2/email/email-address-insights',
+            { },
+            { },
+            serializeJSON( formParams )
+        );
+        if ( apiResponse.statusCode == 200 ) {
+            apiResponse[ 'data' ] = deserializeJSON( apiResponse.rawData );
+        }
+        return apiResponse;
+    }
+
 
     // private
 

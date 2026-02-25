@@ -4,7 +4,6 @@ function getMailboxValidation(required string email) {
 
   var res = request.prc.aws.ses.validateEmail(arguments.email);
 
-  writeDump(res);abort;
   if (res.statusCode != 200) {
     throw(
       type    = "SES.GetEmailAddressInsightsFailed",

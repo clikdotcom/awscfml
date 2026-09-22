@@ -1,28 +1,38 @@
 <cfscript>
+
+
 queueName = "testqueue9.fifo";
 
 messages = request.prc.aws.sqs.receiveMessage(
-        queueName=queueName,
-        maxNumberOfMessages=10
+	queueName=queueName,
+	maxNumberOfMessages=100
 );
 
 results = [];
 
 if (! IsArray(messages.data.receiveMessageResult) ) {
-    if ( IsStruct(messages.data.receiveMessageResult) && messages.data.receiveMessageResult.keyExists("message") ) {
-        results = [messages.data.receiveMessageResult.message];
-    }
+	if ( IsStruct(messages.data.receiveMessageResult) && messages.data.receiveMessageResult.keyExists("message") ) {
+		results = [messages.data.receiveMessageResult.message];
+	}
 }
 else  {
-    results = messages.data.receiveMessageResult;
+	results = messages.data.receiveMessageResult;
 }
 
 if (! results.len() ) {
-    writeOutput("No messages in queue");
+	writeOutput("No messages in queue");
 }
 
 for (message in results) {
-    writeDump(deserializeJSON( message.body ) );
+    try {
+        body = deserializeJSON(message.body);
+    }
+    catch (any e) {
+        body = message.body;
+    }
+
+    writeDump( body );
+
     delete = request.prc.aws.sqs.deleteMessage(
         queueName=queueName,
         receiptHandle=message.receiptHandle

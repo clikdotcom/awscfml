@@ -101,10 +101,10 @@ component accessors="true" {
         apiResponse[ 'rawData' ] = rawResponse.filecontent;
 
         if (
-            find('application/x-amz-json', rawResponse.mimetype) &&
+            find( 'application/x-amz-json', rawResponse.mimeType ) &&
             !isSimpleValue( apiResponse.rawData )
         ) {
-            apiResponse.rawData = apiResponse.rawData.toString( 'utf-8' );
+            apiResponse.rawData = toString( apiResponse.rawData, 'utf-8' );
         }
 
         apiResponse[ 'host' ] = arguments.host;

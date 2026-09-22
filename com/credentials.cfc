@@ -138,7 +138,7 @@ component {
                                 'queryParams': { 'account_id': sso_account_id, 'role_name': sso_role_name }
                             };
 
-                            var credentials = fetchCredentials( sso, httpArgs );
+                            var credentials = fetchCredentials( 'sso', httpArgs );
                             if ( validCredentials( credentials ) ) {
                                 return credentials;
                             }
@@ -229,7 +229,7 @@ component {
                 'token': data.roleCredentials.sessionToken
             };
             var epochDate = createObject( 'java', 'java.util.Date' ).init( javacast( 'int', 0 ) );
-            var expires = dateAdd( 'l', roleCredentials.expiration, variables.epochDate );
+            var expires = dateAdd( 'l', data.roleCredentials.expiration, epochDate );
         } else {
             var keys = { 'awsKey': data.AccessKeyId, 'awsSecretKey': data.SecretAccessKey, 'token': data.Token };
             var expires = parseDateTime( data.Expiration );

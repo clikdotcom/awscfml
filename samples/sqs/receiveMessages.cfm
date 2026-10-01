@@ -1,7 +1,7 @@
 <cfscript>
 
 
-queueName = "testqueue9.fifo";
+queueName = "weblog_test";
 
 messages = request.prc.aws.sqs.receiveMessage(
 	queueName=queueName,
@@ -9,6 +9,11 @@ messages = request.prc.aws.sqs.receiveMessage(
 );
 
 results = [];
+
+if (!messages.statuscode eq 200) {
+    writeDump(messages);
+    abort;
+}
 
 if (! IsArray(messages.data.receiveMessageResult) ) {
 	if ( IsStruct(messages.data.receiveMessageResult) && messages.data.receiveMessageResult.keyExists("message") ) {
